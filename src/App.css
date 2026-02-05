@@ -1,0 +1,743 @@
+.app {
+  min-height: 100vh;
+  background: var(--bg-pink);
+  /* Solid pink background for the whole section */
+  position: relative;
+  overflow-x: hidden;
+  /* Allow vertical scrolling for new sections */
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 10%;
+  /* Matched 10% horizontal padding for perfect alignment */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: transparent;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  /* Switched to Poppins */
+  color: var(--primary-pink);
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  font-weight: 500;
+}
+
+/* Hamburger Styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 200;
+}
+
+.hamburger span {
+  width: 30px;
+  height: 3px;
+  background: var(--primary-pink);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Mobile Panel */
+.mobile-panel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100vh;
+  background: #fff7f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 150;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+}
+
+.mobile-panel.open {
+  right: 0;
+}
+
+.panel-links {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  text-align: center;
+}
+
+.panel-links span {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-pink);
+  font-family: 'Poppins', sans-serif;
+  /* Switched to Poppins */
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10vh 10% 0;
+  position: sticky;
+  /* Sticky effect started */
+  top: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-content {
+  flex: 1;
+  z-index: 2;
+  animation: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  /* Reduced size for better fit */
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--primary-pink);
+}
+
+.hero-description {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  color: var(--dark-text);
+  margin-bottom: 2.5rem;
+  opacity: 0.8;
+  max-width: 500px;
+  line-height: 1.7;
+}
+
+.btn-explore {
+  display: inline-block;
+  padding: 1rem 2.8rem;
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--secondary-pink) 100%);
+  color: white;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 8px 25px rgba(255, 77, 109, 0.3);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-explore:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(255, 77, 109, 0.5);
+}
+
+/* Removed image mask to eliminate white outline effect */
+.hero-image-container {
+  flex: 1.2;
+  /* Increased flex to move closer to left */
+  display: flex;
+  justify-content: center;
+  /* Moved from flex-end to center to move it leftward */
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  height: 80vh;
+  /* Increased height for larger image */
+}
+
+.hero-image {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  /* Image fits container height */
+  object-fit: contain;
+  border: none;
+}
+
+/* Decorative elements */
+.blob {
+  position: absolute;
+  z-index: 1;
+  filter: blur(100px);
+  border-radius: 50%;
+}
+
+.blob-1 {
+  width: 600px;
+  height: 600px;
+  background: rgba(255, 77, 109, 0.15);
+  top: -200px;
+  right: -100px;
+}
+
+.blob-2 {
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 117, 143, 0.08);
+  bottom: -100px;
+  left: -100px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(120px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-30px);
+  }
+}
+
+/* New Valentine Section Styles */
+.valentine-section {
+  padding: 100px 10%;
+  background: white;
+  border-radius: 60px 60px 0 0;
+  position: relative;
+  z-index: 10;
+  /* Higher than hero */
+  margin-top: 0;
+  /* Reset margin for clean slide */
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.05);
+  /* Soft shadow on top of hero */
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+  color: var(--primary-pink);
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--dark-text);
+  opacity: 0.7;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.val-card {
+  position: relative;
+  height: 400px;
+  /* Uniform height for boxes */
+  background: var(--bg-pink);
+  border-radius: 30px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.image-card .card-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.val-card:hover .card-bg,
+.val-card.revealed .card-bg {
+  transform: scale(1.1);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  /* Transparent glass base */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(15px);
+  /* Strong glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 5;
+}
+
+/* Hover effect and Revealed class for tap */
+.val-card:hover .card-overlay,
+.val-card.revealed .card-overlay {
+  opacity: 1;
+  transform: translateY(0);
+  background: rgba(255, 77, 109, 0.2);
+  /* Subtle pink tint on hover/reveal */
+}
+
+/* Mobile Interaction */
+@media (max-width: 992px) {
+  .val-card .card-overlay {
+    /* Transitions will now be triggered by the .revealed class via tap */
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.val-card h3 {
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.val-card p {
+  font-size: 1rem;
+  color: white;
+  line-height: 1.5;
+  opacity: 0.95;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hero {
+    height: auto;
+    min-height: 100vh;
+    position: relative;
+    /* Remove sticky on mobile for better scrolling usability */
+    flex-direction: column;
+    /* Text first, then image below */
+    text-align: center;
+    padding: 140px 5% 60px;
+    gap: 40px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    margin-top: 0;
+    z-index: 5;
+  }
+
+  .hero-image-container {
+    justify-content: center;
+    height: auto;
+    max-height: 45vh;
+    width: 100%;
+  }
+
+  .hero-image {
+    max-width: 100%;
+    height: 100%;
+  }
+
+  .hero-description {
+    margin: 0 auto 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-image-container {
+    height: 40vh;
+  }
+}
+
+/* Timeline Section Styles */
+.timeline-section {
+  padding: 100px 10%;
+  background: white;
+  position: relative;
+  z-index: 10;
+}
+
+.timeline-container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  padding: 40px 0;
+}
+
+/* The vertical line */
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--primary-pink), transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.timeline-item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  background: var(--primary-pink);
+  border: 4px solid #fff;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  box-shadow: 0 0 15px rgba(255, 77, 109, 0.4);
+}
+
+.timeline-content {
+  width: 42%;
+  padding: 30px;
+  background: #fffafa;
+  border: 1px solid rgba(255, 77, 109, 0.1);
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.timeline-content:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(255, 77, 109, 0.12);
+  border-color: var(--primary-pink);
+}
+
+.timeline-date {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-pink);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-content h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  color: var(--dark-text);
+  margin-bottom: 1rem;
+}
+
+.timeline-content p {
+  font-size: 1rem;
+  color: var(--dark-text);
+  opacity: 0.7;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .timeline-container::before {
+    left: 30px;
+  }
+
+  .timeline-dot {
+    left: 30px;
+  }
+
+  .timeline-item,
+  .timeline-item:nth-child(even) {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 60px;
+  }
+
+  .timeline-content {
+    width: 100%;
+  }
+}
+
+/* Love Notes Section Styles */
+.notes-section {
+  padding: 100px 10%;
+  background: #fff;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.notes-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 40px 0;
+}
+
+.love-note {
+  background: #fff0f3;
+  /* Softer, richer pink background */
+  border: 1px solid rgba(255, 77, 109, 0.2);
+  padding: 40px 30px;
+  width: 300px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(255, 77, 109, 0.08);
+  /* Pink-tinted shadow */
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.love-note:nth-child(1) {
+  transform: rotate(-3deg);
+}
+
+.love-note:nth-child(2) {
+  transform: rotate(2deg);
+  margin-top: 20px;
+}
+
+.love-note:nth-child(3) {
+  transform: rotate(-2deg);
+}
+
+.love-note:hover {
+  transform: rotate(0deg) translateY(-15px);
+  box-shadow: 0 25px 50px rgba(255, 77, 109, 0.15);
+  border-color: var(--primary-pink);
+  z-index: 5;
+}
+
+.note-pin {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: var(--primary-pink);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.love-note p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--dark-text);
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.note-footer {
+  display: block;
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-pink);
+  font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .notes-grid {
+    gap: 30px;
+  }
+
+  .love-note {
+    width: 100%;
+    transform: none !important;
+    margin-top: 0 !important;
+  }
+}
+
+/* Proposal Section Styles */
+.proposal-section {
+  padding: 15vh 5%;
+  background: linear-gradient(135deg, #fff0f3 0%, #ffe5ec 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 80vh;
+  position: relative;
+  z-index: 10;
+  border-radius: 60px 60px 0 0;
+  margin-top: -60px;
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.03);
+}
+
+.proposal-container {
+  max-width: 700px;
+  animation: fadeIn 1s ease;
+}
+
+.proposal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  color: var(--primary-pink);
+  margin-bottom: 1.5rem;
+}
+
+.proposal-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  color: var(--dark-text);
+  margin-bottom: 3rem;
+  opacity: 0.8;
+}
+
+.proposal-buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-yes {
+  padding: 1.2rem 3.5rem;
+  background: var(--primary-pink);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 77, 109, 0.4);
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-yes:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 40px rgba(255, 77, 109, 0.6);
+}
+
+.btn-no {
+  padding: 1rem 2.5rem;
+  background: white;
+  color: var(--primary-pink);
+  border: 2px solid var(--primary-pink);
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.accepted-message {
+  animation: scaleIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.confetti-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.accepted-message h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--primary-pink);
+  margin-bottom: 1rem;
+}
+
+.accepted-message p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  color: var(--dark-text);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .proposal-section {
+    padding: 100px 5%;
+  }
+
+  .proposal-buttons {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
