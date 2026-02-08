@@ -219,6 +219,46 @@ function App() {
         </div>
       </section>
 
+      {/* Modern Story Section */}
+      <section className="story-section" ref={storyRef}>
+        <div className="section-header">
+          <h2 className="section-title">Our Love Story</h2>
+          <p className="section-subtitle">Every love story is beautiful, but ours is my favorite</p>
+        </div>
+        <div className="story-timeline">
+          <div className="story-card">
+            <div className="story-icon">💫</div>
+            <h3>The First Glance</h3>
+            <p>The moment our eyes met, I knew something special was about to begin. Your smile lit up the entire room.</p>
+          </div>
+          <div className="story-card">
+            <div className="story-icon">💬</div>
+            <h3>First Conversation</h3>
+            <p>Our first conversation felt like we'd known each other forever. Time flew by as we talked about everything and nothing.</p>
+          </div>
+          <div className="story-card">
+            <div className="story-icon">❤️</div>
+            <h3>Falling in Love</h3>
+            <p>With every passing day, I fell deeper. Your kindness, humor, and the way you care about others made me realize you're the one.</p>
+          </div>
+          <div className="story-card">
+            <div className="story-icon">🌟</div>
+            <h3>Our Journey</h3>
+            <p>Through ups and downs, laughter and tears, we've grown together. Every moment with you is a treasure I hold dear.</p>
+          </div>
+          <div className="story-card">
+            <div className="story-icon">💝</div>
+            <h3>Forever Together</h3>
+            <p>You're not just my Valentine, you're my best friend, my partner, and my everything. I choose you today and always.</p>
+          </div>
+          <div className="story-card">
+            <div className="story-icon">🌹</div>
+            <h3>My Promise</h3>
+            <p>I promise to love you more each day, to support your dreams, and to be by your side through every adventure life brings.</p>
+          </div>
+        </div>
+      </section>
+
       {/* New Modern Section: Gallery */}
       <section className="gallery-section" ref={galleryRef}>
         <div className="section-header gallery-header">
@@ -250,11 +290,7 @@ function App() {
             <div className="proposal-buttons">
               <button
                 className="btn-yes"
-                onClick={() => {
-                  setIsAccepted(true);
-                  const message = "Hey! I said YES! 💖 I'd love to be your Valentine! 🥰";
-                  window.open(`https://wa.me/94743090367?text=${encodeURIComponent(message)}`, '_blank');
-                }}
+                onClick={() => setIsAccepted(true)}
               >
                 Yes, Absolutely!
               </button>
