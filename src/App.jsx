@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './App.css'
 
 function App() {
@@ -7,6 +7,62 @@ function App() {
   const [noButtonStyle, setNoButtonStyle] = useState({})
   const [isAccepted, setIsAccepted] = useState(false)
   const proposalRef = useRef(null)
+  const valentineRef = useRef(null)
+  const timelineRef = useRef(null)
+  const galleryRef = useRef(null)
+  const storyRef = useRef(null)
+
+  const [showTopBtn, setShowTopBtn] = useState(false)
+  const [expandedItem, setExpandedItem] = useState(null)
+
+  const [currentStep, setCurrentStep] = useState(1);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedFood, setSelectedFood] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowTopBtn(true)
+      } else {
+        setShowTopBtn(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  const scrollToValentine = () => {
+    valentineRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const scrollToTimeline = () => {
+    timelineRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const scrollToGallery = () => {
+    galleryRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const scrollToProposal = () => {
+    proposalRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+
+
+  const scrollToStory = () => {
+    storyRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const toggleCard = (id) => setActiveCard(activeCard === id ? null : id)
@@ -33,6 +89,7 @@ function App() {
       })
     }
   }
+
   return (
     <div className="app">
       <nav className="navbar">
@@ -42,9 +99,9 @@ function App() {
 
         {/* Desktop Links */}
         <div className="navbar-links desktop-only">
-          <span>Story</span>
-          <span>Gallery</span>
-          <span>Letters</span>
+          <span onClick={scrollToStory}>Story</span>
+          <span onClick={scrollToGallery}>Gallery</span>
+          <span onClick={scrollToProposal}>Proposal</span>
         </div>
 
         {/* Hamburger Icon */}
@@ -57,9 +114,9 @@ function App() {
         {/* Mobile Slide Panel */}
         <div className={`mobile-panel ${isMenuOpen ? 'open' : ''}`}>
           <div className="panel-links">
-            <span onClick={toggleMenu}>Story</span>
-            <span onClick={toggleMenu}>Gallery</span>
-            <span onClick={toggleMenu}>Letters</span>
+            <span onClick={() => { toggleMenu(); scrollToStory(); }}>Story</span>
+            <span onClick={() => { scrollToGallery(); toggleMenu() }}>Gallery</span>
+            <span onClick={() => { scrollToProposal(); toggleMenu() }}>Proposal</span>
           </div>
         </div>
       </nav>
@@ -77,7 +134,7 @@ function App() {
             and amazing as you are. Each moment with you is a gift I treasure
             forever. I love you more with every passing heartbeat.
           </p>
-          <button className="btn-explore">
+          <button className="btn-explore" onClick={scrollToValentine}>
             Explore My Love
           </button>
         </div>
@@ -92,7 +149,7 @@ function App() {
       </section>
 
       {/* New Modern Section: Why I Love You */}
-      <section className="valentine-section">
+      <section className="valentine-section" ref={valentineRef}>
         <div className="section-header">
           <h2 className="section-title">Reasons Why I Love You</h2>
           <p className="section-subtitle">Since the moment we met, you've changed my world in so many ways.</p>
@@ -162,66 +219,27 @@ function App() {
         </div>
       </section>
 
-      {/* New Modern Section: Love Timeline */}
-      <section className="timeline-section">
-        <div className="section-header">
-          <h2 className="section-title">Our Beautiful Journey</h2>
-          <p className="section-subtitle">Every moment spent with you is a memory I'll cherish forever.</p>
+      {/* New Modern Section: Gallery */}
+      <section className="gallery-section" ref={galleryRef}>
+        <div className="section-header gallery-header">
+          <img src="/images/home9.png" alt="Decorative Left" className="header-decor" />
+          <div className="header-content">
+            <h2 className="section-title">Our Sweet Memories</h2>
+            <p className="section-subtitle">Captured moments of happiness and love.</p>
+          </div>
+          <img src="/images/home8.gif" alt="Decorative Right" className="header-decor" />
         </div>
-
-        <div className="timeline-container">
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <span className="timeline-date">The Beginning</span>
-              <h3>The Day We Met</h3>
-              <p>Everything changed for the better when you walked into my life. That spark was real.</p>
+        <div className="gallery-grid">
+          {Array.from({ length: 30 }, (_, i) => i + 1).map((num) => (
+            <div key={num} className="gallery-item">
+              <img src={`/images/bathali${num}.jpeg`} alt={`Memory ${num}`} loading="lazy" />
             </div>
-          </div>
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <span className="timeline-date">Growing Together</span>
-              <h3>Endless Late Night Talks</h3>
-              <p>Countless hours spent discovering everything about each other. Those are my favorite nights.</p>
-            </div>
-          </div>
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <span className="timeline-date">Our Bond</span>
-              <h3>Creating Memories</h3>
-              <p>From simple walks to biggest laughs, every second with you feels like a dream come true.</p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
       {/* New Modern Section: Love Notes */}
-      <section className="notes-section">
-        <div className="section-header">
-          <h2 className="section-title">Little Love Notes</h2>
-          <p className="section-subtitle">Bits and pieces of my heart, just for you.</p>
-        </div>
 
-        <div className="notes-grid">
-          <div className="love-note">
-            <div className="note-pin"></div>
-            <p>"I promise to always be your biggest supporter and your safest place to land."</p>
-            <span className="note-footer">— Always Yours</span>
-          </div>
-          <div className="love-note">
-            <div className="note-pin"></div>
-            <p>"Thank you for being the person who makes my world feel complete."</p>
-            <span className="note-footer">— Forever & Ever</span>
-          </div>
-          <div className="love-note">
-            <div className="note-pin"></div>
-            <p>"The best parts of my day are always the ones I spend with you."</p>
-            <span className="note-footer">— My Heart</span>
-          </div>
-        </div>
-      </section>
 
       {/* New Interactive Proposal Section */}
       <section className="proposal-section" ref={proposalRef}>
@@ -232,9 +250,13 @@ function App() {
             <div className="proposal-buttons">
               <button
                 className="btn-yes"
-                onClick={() => setIsAccepted(true)}
+                onClick={() => {
+                  setIsAccepted(true);
+                  const message = "Hey! I said YES! 💖 I'd love to be your Valentine! 🥰";
+                  window.open(`https://wa.me/94743090367?text=${encodeURIComponent(message)}`, '_blank');
+                }}
               >
-                Yes, Absolutely! 💖
+                Yes, Absolutely!
               </button>
               <button
                 className="btn-no"
@@ -242,19 +264,26 @@ function App() {
                 onMouseEnter={moveButton}
                 onClick={moveButton}
               >
-                No 😢
+                No
               </button>
             </div>
           </div>
         ) : (
           <div className="accepted-message">
-            <div className="confetti-icon">🎉</div>
+            <img src="/images/home7.gif" alt="Accepted" className="accepted-gif" />
             <h2>Yay! I'm the luckiest!</h2>
-            <p>I can't wait to make this Valentine's Day unforgettable with you. I love you! ❤️</p>
+            <p>I can't wait to make this Valentine's Day unforgettable with you. I love you!</p>
           </div>
         )}
-      </section>
-    </div>
+      </section >
+      {
+        showTopBtn && (
+          <button className="scroll-top-btn" onClick={scrollToTop}>
+            ↑
+          </button>
+        )
+      }
+    </div >
   )
 }
 
